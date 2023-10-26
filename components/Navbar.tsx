@@ -6,7 +6,7 @@ import { Fragment } from 'react'
 
 export default function Navbar() {
     return (
-        <nav className="container flex items-center justify-between mx-auto py-4 px-3 sm:px-5 xl:px-2">
+        <nav className="lg:w-[90%] xl:w-[1250px] flex items-center justify-between mx-auto py-4 px-3 sm:px-5 xl:px-2">
             <Link href="/" className="block font-bold text-2xl">日々</Link>
             <div className="flex items-center">
                 <p className="sm:mr-8 font-medium mr-4">Hello, Arie</p>
