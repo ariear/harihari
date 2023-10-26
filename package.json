@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@headlessui/react": "^1.7.17",
+    "@hello-pangea/dnd": "^16.3.0",
     "next": "13.5.6",
     "react": "^18",
     "react-dom": "^18"

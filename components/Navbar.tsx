@@ -6,14 +6,14 @@ import { Fragment } from 'react'
 
 export default function Navbar() {
     return (
-        <nav className="container flex items-center justify-between mx-auto py-6">
+        <nav className="container flex items-center justify-between mx-auto py-4 px-3 sm:px-5 xl:px-2">
             <Link href="/" className="block font-bold text-2xl">日々</Link>
             <div className="flex items-center">
-                <p className="mr-8">Hello, Arie</p>
+                <p className="sm:mr-8 font-medium mr-4">Hello, Arie</p>
                 <Menu as="div" className="relative inline-block text-left">
                     <div>
                         <Menu.Button>
-                            <Image src={'https://i.pinimg.com/736x/45/69/c9/4569c98459cf54904bbbba7c8b456dc7.jpg'} alt="pp" className="rounded-full border border-gray-500" width={45} height={45} />
+                            <Image src={'https://i.pinimg.com/736x/45/69/c9/4569c98459cf54904bbbba7c8b456dc7.jpg'} alt="pp" className="rounded-full border border-gray-500" width={42} height={42} />
                         </Menu.Button>
                     </div>
                     <Transition
