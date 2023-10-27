@@ -45,6 +45,7 @@ model User {
   image         String?
   accounts      Account[]
   sessions      Session[]
+  tasks         Task[]
 }
 
 model VerificationToken {
@@ -53,4 +54,21 @@ model VerificationToken {
   expires    DateTime
 
   @@unique([identifier, token])
+}
+
+model Task {
+  id        String  @id @default(cuid())
+  title     String
+  image_link String?
+  column    Column? @relation(fields: [columnId], references: [id])
+  columnId  String?
+  createdBy  User? @relation(fields: [createdById], references: [id])
+  createdById String?
+}
+
+model Column {
+  id          String  @id @default(cuid())
+  colorPoint  String
+  title       String
+  tasks       Task[]
 }
