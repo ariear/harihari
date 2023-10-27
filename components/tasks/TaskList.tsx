@@ -1,3 +1,4 @@
+'use client'
 import { useState } from "react"
 import { DragDropContext } from '@hello-pangea/dnd';
 import initialData from "../data/initial-data"

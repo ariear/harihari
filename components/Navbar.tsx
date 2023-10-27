@@ -3,8 +3,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { Menu, Transition } from '@headlessui/react'
 import { Fragment } from 'react'
+import { signOut, useSession } from "next-auth/react"
+import { useRouter } from "next/navigation"
 
-export default function Navbar({ signOut, router, session }: any) {
+export default function Navbar() {
+    const router = useRouter()
+    const { data: session } = useSession()
+
     return (
         <nav className="lg:w-[90%] xl:w-[1250px] flex items-center justify-between mx-auto py-4 px-3 sm:px-5 xl:px-2">
             <Link href="/" className="block font-bold text-2xl">日々</Link>

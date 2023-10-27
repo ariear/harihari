@@ -1,6 +1,11 @@
-'use client'
-import { SessionProvider } from "next-auth/react"
+import { Metadata } from "next";
 import './globals.css'
+import Wrapper from "./wrapper";
+
+export const metadata: Metadata = {
+  title: 'Hari Hari',
+  description: 'Sebuah aplikasi berbasis website yang berguna untuk anda yang ingin mengelola kegiatan sehari-hari agar lebih terstruktur'
+}
 
 export default function RootLayout({
   children,
@@ -9,12 +14,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <head>
-        <title>Hari Hari</title>
-      </head>
-      <SessionProvider>
-        <body className='bg-[#F5F8FD]'>{children}</body>
-      </SessionProvider>
+        <body className='bg-[#F5F8FD]'>
+          <Wrapper>{children}</Wrapper>
+        </body>
     </html>
   )
 }
