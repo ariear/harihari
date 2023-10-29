@@ -7,6 +7,7 @@ type TaskProps = {
     id: string;
     title: string;
     image_link?: string;
+    sortAt: number;
   },
   index: number
 };

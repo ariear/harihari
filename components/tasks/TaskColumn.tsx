@@ -6,13 +6,14 @@ type Column = {
     id: string;
     colorPoint: string;
     title: string;
-    taskIds: string[];
+    tasks: object[];
 };
 
 type Task = {
     id: string;
     title: string;
     image_link?: string;
+    sortAt: number;
 };
 
 type TaskColumnProps = {
