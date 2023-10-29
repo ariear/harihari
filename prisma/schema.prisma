@@ -60,6 +60,7 @@ model Task {
   id        String  @id @default(cuid())
   title     String
   image_link String?
+  sortAt     Int
   column    Column? @relation(fields: [columnId], references: [id])
   columnId  String?
   createdBy  User? @relation(fields: [createdById], references: [id])
