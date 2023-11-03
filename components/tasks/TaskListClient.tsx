@@ -2,6 +2,7 @@
 import { DragDropContext } from '@hello-pangea/dnd';
 import TaskColumn from './TaskColumn';
 import { updateTaskPositionAction } from '@/app/_actions';
+import { useState } from 'react';
 
 type Task = {
     id: string;
@@ -18,6 +19,8 @@ type Column = {
 };
 
 export default function TaskListClient({ columns }: any) {
+    const [columnTask, setColumnTask] = useState(columns)
+
     const onDragEnd = async (result: any) => {
         const { destination, source, draggableId } = result;
 
@@ -29,14 +32,41 @@ export default function TaskListClient({ columns }: any) {
             return;
         }
 
-        await updateTaskPositionAction(source.droppableId, destination.droppableId, destination.index, draggableId)
+        const startColumn = columnTask.find((column: any) => column.id === source.droppableId);
+        const finishColumn = columnTask.find((column: any) => column.id === destination.droppableId);
+        const draggedTask = startColumn.tasks.find((task: any) => task.id === draggableId);
+
+        startColumn.tasks = startColumn.tasks.filter((task: any) => task.id !== draggableId);
+
+        draggedTask.columnId = destination.droppableId;     
+
+        finishColumn.tasks.splice(destination.index, 0, draggedTask);
+
+        setColumnTask([...columnTask]);
+
+        const taskResults: any = []
+        columnTask.forEach((column: any) => {
+            taskResults.push(...column.tasks)
+        });
+        
+        taskResults.forEach(async (task: any, index: number) => {
+            const updatedData = {
+                id: task.id,
+                sortAt: index + 1,
+                columnId: task.columnId,
+                createdById: task.createdById
+            }
+
+            await updateTaskPositionAction(updatedData)
+        });
+
     }
 
     return (
         <DragDropContext onDragEnd={onDragEnd}>
             <div className="lg:w-[90%] xl:w-[1250px] mx-auto py-4 px-3 sm:px-5 xl:px-2 flex justify-center xl:justify-between items-start flex-wrap">
                 {
-                    columns.map((column: Column) => (
+                    columnTask.map((column: Column) => (
                         <TaskColumn key={column.id} column={column} tasks={column.tasks} />
                     ))
                 }
