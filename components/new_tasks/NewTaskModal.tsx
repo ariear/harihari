@@ -18,6 +18,7 @@ export default function NewTaskModal({ isOpen, closeModal }: any) {
 
         if (forms.image_link !== '') {
             const imageExtensions = ['jpg', 'jpeg', 'png', 'gif', 'bmp', 'webp'];
+            //@ts-ignore
             const linkExtension = forms.image_link.split('.').pop().toLowerCase();
             if (imageExtensions.includes(linkExtension)) {
                 const img = new Image();
@@ -59,6 +60,7 @@ export default function NewTaskModal({ isOpen, closeModal }: any) {
             image_link: forms.image_link,
             sortAt: updatedColumns[0].tasks.length + 1,
             columnId: "column-1",
+            //@ts-ignore
             createdById: session?.user?.id,
         };
         updatedColumns[0].tasks.unshift(newTask);

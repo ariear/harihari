@@ -28,6 +28,7 @@ export async function getColumnAndTaskByUserId() {
             sortAt: 'asc'
           },
           where: {
+            //@ts-ignore
             createdById: session?.user?.id
           }
         }
