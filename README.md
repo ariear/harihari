@@ -8,8 +8,8 @@
 
 ## Preview 📷
 <div align="center">
-  
-![202311041506](https://github.com/ariear/harihari/assets/91861324/0b353fb3-3692-40bf-a2ed-6334554d4c9d)
+
+![Screenshot 2023-11-04 173232](https://github.com/ariear/harihari/assets/91861324/ad1ec7df-36e9-4f25-afbb-498a404a1b5a)
 
 </div>
 
