@@ -1,9 +1,9 @@
 'use client'
 import { DragDropContext } from '@hello-pangea/dnd';
 import TaskColumn from './TaskColumn';
-import { updateTaskPositionAction } from '@/app/_actions';
 import { useEffect } from 'react';
 import { useTaskStore } from '@/app/store/zustand';
+import TaskListLoading from './TaskListLoading';
 
 type Task = {
     id: string;
@@ -56,7 +56,7 @@ export default function TaskList() {
         <DragDropContext onDragEnd={onDragEnd}>
             <div className="lg:w-[90%] xl:w-[1250px] mx-auto py-4 px-3 sm:px-5 xl:px-2 flex justify-center xl:justify-between items-start flex-wrap">
                 {
-                    isLoading ? 'Loading...' :
+                    isLoading ? <TaskListLoading /> :
                     columnTask.map((column: Column) => (
                         <TaskColumn key={column.id} column={column} tasks={column.tasks} />
                     ))

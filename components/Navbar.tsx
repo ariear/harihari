@@ -14,11 +14,16 @@ export default function Navbar() {
         <nav className="lg:w-[90%] xl:w-[1250px] flex items-center justify-between mx-auto py-4 px-3 sm:px-5 xl:px-2">
             <Link href="/" className="block font-bold text-2xl">日々</Link>
             <div className="flex items-center">
-                <p className="sm:mr-8 font-medium mr-4">Hello, {session?.user?.name || 'people'}</p>
+                <p className="sm:mr-8 font-medium mr-4 flex items-center">Hello, {session?.user?.name || <span className="ml-2 w-10 h-3 bg-gray-300 rounded-full animate-pulse"></span>}</p>
                 <Menu as="div" className="relative inline-block text-left">
                     <div>
                         <Menu.Button>
-                            <Image src={session?.user?.image || 'https://i.ibb.co/m5gsY0M/Blank-profile-picture-973460-1280.png'} alt="pp" className="rounded-full border border-gray-500" width={42} height={42} />
+                            {
+                                session?.user?.image ?
+                                    <Image src={session?.user?.image} alt="pp" className="rounded-full border border-gray-500" width={42} height={42} />
+                                    :
+                                    <div className="w-[42px] h-[42px] rounded-full bg-gray-300 animate-pulse"></div>
+                            }
                         </Menu.Button>
                     </div>
                     <Transition
