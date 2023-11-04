@@ -9,7 +9,7 @@ export default function Home() {
       <Navbar />
       <ToastContainer />
       <div className="pt-5 sm:pt-10">
-        <p className="font-bold text-2xl text-center mb-4">Organize your daily work</p>
+        <p className="font-bold text-2xl text-center mb-4">Organize your daily work ✨</p>
         <TaskList />
       </div>
       <NewTask />
