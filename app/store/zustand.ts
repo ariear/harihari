@@ -1,5 +1,6 @@
 import { create } from "zustand";
-import { createTaskAction, getColumnAndTaskByUserIdAction, updateTaskPositionAction } from "../_actions";
+import { createTaskAction, deleteTaskAction, getColumnAndTaskByUserIdAction, updateTaskPositionAction } from "../_actions";
+import { toast } from 'react-toastify';
 
 type State = {
     columnTask: any[];
@@ -8,6 +9,7 @@ type State = {
     updatePositionTask: () => Promise<void>;
     createTask: (data: createDataTask) => void;
     setColumnTask: (newData: any) => void;
+    deleteTask: (index: any) => void
 };
 
 type createDataTask = {
@@ -37,7 +39,7 @@ export const useTaskStore = create<State>((set, get) => ({
         get().columnTask.forEach((column: any) => {
             taskResults.push(...column.tasks)
         });
-        
+
         taskResults.forEach(async (task: any, index: number) => {
             const updatedData = {
                 id: task.id,
@@ -48,5 +50,24 @@ export const useTaskStore = create<State>((set, get) => ({
 
             await updateTaskPositionAction(updatedData)
         });
+    },
+    deleteTask: async (taskId: any) => {
+        const updatedData = get().columnTask.map(column => {
+            const updatedTasks = column.tasks.filter((task: any) => task.id !== taskId);
+            return { ...column, tasks: updatedTasks };
+        });
+        set({columnTask: updatedData})
+        toast.success('Successfully deleted task 😊', {
+            position: "top-right",
+            autoClose: 4000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+        });
+
+        await deleteTaskAction(taskId)
     }
 }))

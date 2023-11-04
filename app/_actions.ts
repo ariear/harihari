@@ -1,6 +1,6 @@
 'use server'
 
-import { createTask, getColumnAndTaskByUserId, updateTaskPosition } from "@/components/lib/tasks"
+import { createTask, deleteTask, getColumnAndTaskByUserId, updateTaskPosition } from "@/components/lib/tasks"
 
 type updatedDataTask = {
     id: string,
@@ -28,4 +28,8 @@ export async function updateTaskPositionAction(updatedData: updatedDataTask) {
 
 export async function createTaskAction(data: createDataTask) {
     await createTask(data)
+}
+
+export async function deleteTaskAction(taskId: string) {
+    await deleteTask(taskId)
 }

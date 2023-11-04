@@ -74,3 +74,15 @@ export async function createTask(data: createDataTask) {
     return { error }
   }
 }
+
+export async function deleteTask(taskId: string) {
+  try {
+    await prisma.task.delete({
+      where: {
+        id: taskId
+      }
+    })
+  } catch (error) {
+    return {error}
+  }
+}
