@@ -1,6 +1,6 @@
 import { getServerSession } from "next-auth"
 import { prisma } from "./prisma"
-import { authOptions } from "@/app/api/auth/[...nextauth]/route"
+import { authOptions } from "@/app/api/auth/authOptions"
 
 type updatedDataTask = {
   id: string,
