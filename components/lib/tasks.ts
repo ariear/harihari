@@ -9,6 +9,15 @@ type updatedDataTask = {
   createdById: string
 }
 
+type createDataTask = {
+  id: string,
+  title: string,
+  image_link: string,
+  sortAt: number,
+  columnId: string,
+  createdById: string
+}
+
 export async function getColumnAndTaskByUserId() {
   try {
     const session = await getServerSession(authOptions)
@@ -41,6 +50,24 @@ export async function updateTaskPosition(updatedData: updatedDataTask) {
       data: {
         sortAt,
         columnId
+      }
+    })
+  } catch (error) {
+    return { error }
+  }
+}
+
+export async function createTask(data: createDataTask) {
+  const {id, title, image_link, sortAt, columnId, createdById} = data
+  try {
+    await prisma.task.create({
+      data: {
+        id,
+        title,
+        image_link,
+        sortAt,
+        columnId,
+        createdById,
       }
     })
   } catch (error) {
