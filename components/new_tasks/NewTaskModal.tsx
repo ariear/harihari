@@ -13,45 +13,7 @@ export default function NewTaskModal({ isOpen, closeModal }: any) {
         title: ''
     })
 
-    const createNewTask = (e: any) => {
-        e.preventDefault()
-
-        if (forms.image_link !== '') {
-            const imageExtensions = ['jpg', 'jpeg', 'png', 'gif', 'bmp', 'webp'];
-            //@ts-ignore
-            const linkExtension = forms.image_link.split('.').pop().toLowerCase();
-            if (imageExtensions.includes(linkExtension)) {
-                const img = new Image();
-                img.src = forms.image_link;
-
-                img.onerror = () => {
-                    toast.error('Image link is invalid 😢', {
-                        position: "top-right",
-                        autoClose: 4000,
-                        hideProgressBar: false,
-                        closeOnClick: true,
-                        pauseOnHover: true,
-                        draggable: true,
-                        progress: undefined,
-                        theme: "light",
-                    });
-                    return false
-                };
-            } else {
-                toast.error('Image link is invalid 😢', {
-                    position: "top-right",
-                    autoClose: 4000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                    theme: "light",
-                });
-                return false
-            }
-        }
-
+    const onCreateNewTaskHandler = () => {
         const updatedColumns = [...columnTask];
 
         const newTask = {
@@ -80,6 +42,48 @@ export default function NewTaskModal({ isOpen, closeModal }: any) {
             progress: undefined,
             theme: "light",
         });
+    }
+
+    const createNewTask = (e: any) => {
+        e.preventDefault()
+
+        if (forms.title === '') {
+            toast.error('Title is required 🙏', {
+                position: "top-right",
+                autoClose: 4000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
+            return
+        }
+
+        if (forms.image_link !== '') {
+            const img = new Image();
+            img.src = forms.image_link;
+
+            img.onload = () => onCreateNewTaskHandler()
+
+            img.onerror = () => {
+                toast.error('Image link is invalid 😢', {
+                    position: "top-right",
+                    autoClose: 4000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                });
+                return
+            };
+            if (!img.complete) return
+        } else {
+            onCreateNewTaskHandler()
+        }
     }
 
     return (
